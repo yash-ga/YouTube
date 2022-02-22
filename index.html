@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>utube</title>
+    <!-- <link rel="stylesheet" href="utube.css"> -->
+    <link rel="stylesheet" href="utube2.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+</head>
+
+<body>
+   
+    <div id="videos_div">
+        <div class="searchbar">
+            <input type="text" id="video" placeholder="Search">
+            <button id="search_button" onclick="searchvideo()">Search</button>
+    
+        </div>
+    </div>
+    
+    <nav id="nav-menu">
+
+        <ul class="nav-menu-items">
+            <div id="navbar-toogle">
+                <a href="#" class="menu-bars" id="hide-menu">
+
+                    <i class="fas fa-bars nav-icon"></i>
+                </a>
+                <a href="#">
+                    <h1><i class="fab fa-youtube" id="youtube-logo"></i>YouTube</h1>
+                </a>
+            </div>
+            <hr>/
+            <div class="nav-section">
+                <li class="nav-text"><a href="#"><i class="fas fa-home nav-icon"></i>Home</a></li>
+                <li class="nav-text"><a href="#"><i class="fas fa-fire nav-icon"></i>Trending</a></li>
+                <li class="nav-text"><a href="#"><i class="fab fa-youtube nav-icon"></i>Subscriptions</a></li>
+            </div>
+            <hr />
+            <div class="nav-section">
+                <li class="nav-text"><a href="#"><i class="fas fa-play-circle nav-icon"></i>Library</a></li>
+                <li class="nav-text"><a href="#"><i class="fas fa-history nav-icon"></i>History</a></li>
+                <li class="nav-text"><a href="#"><i class="fas fa-clock nav-icon"></i>Watch later</a></li>
+            </div>
+
+        </ul>
+    </nav>
+
+</body>
+
+
+<script>
+    let div = document.getElementById("videos_div");//inside this div all below stuff ishappening
+    async function searchvideo() {
+
+        let video = document.getElementById("video").value;
+        let res = await fetch(
+            `https://youtube.googleapis.com/youtube/v3/search?q=popularvideosinindia&type=video&maxResults=20&key=AIzaSyAJdfIeaDS_Qs4sjBqrWVP9dS42UCOOoJk`
+        );
+        let data = await res.json();
+        //console.log("data:",data);
+        //    for(video of data.items){
+        //        console.log(video.id);
+        //    } OR
+        for ({ id: { videoId }, } of data.items) {
+            console.log("id", videoId);
+
+            let video_frame = document.createElement("iframe");
+            video_frame.src = `https://www.youtube.com/embed/${videoId}`;//iframe used for video aplying on webpage copied from utube -share-embed
+            video_frame.allow = `fullscreen`//allows fullscreen
+            div.append(video_frame);//append to get it on webpage
+        }
+    }
+    const openmenu = document.querySelector('#show-menu')
+    const hiddenmenuicon = document.querySelector('#hide-menu')
+    const sidemenu = document.querySelector("#nav-menu")
+    openmenu.addEventListener('click', function () {
+        sidemenu.classList.add('active')
+    })
+    hiddemenuicon.addEventListener('click', function () {
+        sidemenu.classList.remove('active')
+    })
+</script>
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</html>
+<!-- //'https://youtube.googleapis.com/youtube/v3/search?q=tesla&key=[YOUR_API_KEY]' -->

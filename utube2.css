@@ -1,0 +1,44 @@
+body{
+    display: flex;
+    flex-direction: row-reverse;
+}
+#videos_div{
+    width: 73%;
+    border: 2px solid black;
+}
+#nav-menu{
+    width: 25%;
+    border: 1px solid red;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: capitalize;
+}
+#youtube-logo{
+    color: red;
+}
+a{
+    text-decoration: none;
+    color:#fff;
+    /* margin-left: 10px; */
+}
+.searchbar{
+    text-align: center;
+}
+li{
+    list-style-type: none;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.nav-icon{
+    margin-right: 10px;
+}
+input{
+    outline: none;
+    width: 30%;
+    padding: 5px 10px;
+}
+button{
+    padding: 5px 10px;
+}
